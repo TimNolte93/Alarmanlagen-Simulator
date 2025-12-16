@@ -30,7 +30,7 @@
     <div id="ergebnisBox"></div>
 </div>
 <script>
-    // --- HIER BEGINNT JAVASCRIPT (DIE LOGIK) ---
+    // HIER BEGINNT JAVASCRIPT 
 
     function checkAlarm() {
         // 1. EINGABE: Wir holen uns den Status der Checkboxen
@@ -47,25 +47,25 @@
         // Syntax-Wechsel: 'and' ist '&&', 'or' ist '||'
         
         if (hauptschalter) {
-            // Strom ist an
             if (scharf) {
-                // System ist scharf -> Prüfen auf Einbruch
-                if (fenster || bewegung) {
-                    // ALARM FALL
-                    output.className = "alarm"; // Rotes Design
-                    output.innerHTML = "ALARM AUSGELÖST! <br>Polizei verständigt.";
-                } else {
-                    // ALLES OK FALL
-                    output.className = "safe"; // Grünes Design
+                if (fenster && bewegung) {
+                    output.className = "alarm"; 
+                    output.innerHTML = "VOLLALARM<br>Bewegung & Fensterkontakt!";
+                } else if (fenster) {
+                    output.className = "alarm";
+                    output.innerHTML = "Fensterkontakt unterbrochen.<br>Fenster prüfen!";
+                } else if (bewegung) {
+                    output.className = "alarm";
+                    output.innerHTML = "Bewegung wahrgenommen.<br>Umgebung prüfen!";
+                } else {                    
+                    output.className = "safe"; 
                     output.innerHTML = "System aktiv & sicher.<br>Keine Vorkommnisse.";
                 }
-            } else {
-                // UNSCHARF FALL
-                output.className = "off"; // Graues Design
+            } else {                
+                output.className = "off"; 
                 output.innerHTML = "System ist unscharf (Standby).";
             }
         } else {
-            // HAUPTSCHALTER AUS FALL
             output.className = "off";
             output.innerHTML = "Hauptschalter ist AUS.<br>System deaktiviert.";
         }
